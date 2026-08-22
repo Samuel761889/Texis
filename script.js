@@ -52,39 +52,33 @@ function mostrarDashboard() {
     const etapa = localStorage.getItem("texisEtapa") || "Teen";
 
     document.querySelector(".container").innerHTML = `
+
         <div class="dashboard">
 
-            <button class="mobile-menu-btn" onclick="toggleMenu()">
-                ☰
-            </button>
-
-            <div id="mobile-overlay" class="mobile-overlay" onclick="toggleMenu()"></div>
-
-            <aside id="sidebar" class="sidebar">
+            <aside class="sidebar">
 
                 <div class="sidebar-logo">
-                    <img src="logo.png" class="sidebar-logo-img">
-                    <span>TEXIS</span>
+                    TEXIS
                 </div>
 
-                <button class="menu-button active" onclick="cambiarSeccion('inicio')">
-                    🏠 Inicio
+                <button class="menu-button active" onclick="mostrarSeccion('inicio')">
+                    Inicio
                 </button>
 
-                <button class="menu-button" onclick="cambiarSeccion('chat')">
-                    💬 Chat
+                <button class="menu-button" onclick="mostrarSeccion('chat')">
+                    Chat
                 </button>
 
-                <button class="menu-button" onclick="cambiarSeccion('tareas')">
-                    📝 Tareas
+                <button class="menu-button" onclick="mostrarSeccion('tareas')">
+                    Tareas
                 </button>
 
-                <button class="menu-button" onclick="cambiarSeccion('horario')">
-                    📅 Horario
+                <button class="menu-button" onclick="mostrarSeccion('horario')">
+                    Horario
                 </button>
 
-                <button class="menu-button" onclick="cambiarSeccion('metas')">
-                    🎯 Metas
+                <button class="menu-button" onclick="mostrarSeccion('metas')">
+                    Metas
                 </button>
 
             </aside>
@@ -95,7 +89,7 @@ function mostrarDashboard() {
 
                     <div>
                         <h2 id="page-title">
-                            ${saludoTexis()}
+                            Hola, soy Texis.
                         </h2>
 
                         <p id="page-description">
@@ -1908,38 +1902,4 @@ function escaparHTML(texto) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-}
-
-/* =========================
-   TEXIS 2.0
-   ========================= */
-
-function toggleMenu() {
-
-    document.getElementById("sidebar")
-        ?.classList.toggle("mobile-open");
-
-    document.getElementById("mobile-overlay")
-        ?.classList.toggle("active");
-}
-
-function cambiarSeccion(seccion) {
-
-    mostrarSeccion(seccion);
-
-    document.getElementById("sidebar")
-        ?.classList.remove("mobile-open");
-
-    document.getElementById("mobile-overlay")
-        ?.classList.remove("active");
-}
-
-function saludoTexis() {
-
-    const hora = new Date().getHours();
-
-    if (hora < 12) return "Buenos días, Samuel.";
-    if (hora < 19) return "Buenas tardes, Samuel.";
-
-    return "Buenas noches, Samuel.";
 }
