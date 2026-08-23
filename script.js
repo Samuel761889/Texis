@@ -53,13 +53,17 @@ function mostrarDashboard() {
 
     document.querySelector(".container").innerHTML = `
 
-        <div class="dashboard">
+<div class="dashboard">
 
-            <aside class="sidebar">
+    <button class="hamburger-button" onclick="alternarMenu()">
+        ☰
+    </button>
 
-                <div class="sidebar-logo">
-                    TEXIS
-                </div>
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            TEXIS
+        </div>
 
                 <button class="menu-button active" onclick="mostrarSeccion('inicio')">
                     Inicio
@@ -1903,3 +1907,67 @@ function escaparHTML(texto) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
+
+/* =========================
+   MENÚ DE HAMBURGUESA
+   ========================= */
+
+function alternarMenu() {
+
+    const sidebar = document.querySelector(".sidebar");
+
+    if (!sidebar) {
+        return;
+    }
+
+    sidebar.classList.toggle("menu-open");
+}
+
+/* =========================
+   SPLASH SCREEN
+   ========================= */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        const splash =
+            document.getElementById("splash-screen");
+
+        if (splash) {
+            splash.classList.add("hidden");
+        }
+
+    }, 1500);
+
+});
+
+window.addEventListener("load", function () {
+
+    setTimeout(function () {
+
+        const splash = document.getElementById("splash-screen");
+
+        if (splash) {
+            splash.classList.add("hidden");
+        }
+
+    }, 1500);
+
+});
+
+window.addEventListener("load", function () {
+
+    const splash = document.getElementById("splash-screen");
+
+    setTimeout(function () {
+
+        splash.style.opacity = "0";
+
+        setTimeout(function () {
+            splash.style.display = "none";
+        }, 600);
+
+    }, 1500);
+
+});

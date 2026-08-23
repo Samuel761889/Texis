@@ -660,6 +660,77 @@ textarea {
     color: #77778b;
 }
 
+/* =========================
+   SPLASH SCREEN
+   ========================= */
+
+#splash-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #050510;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    animation: splashAppear 0.8s ease;
+}
+
+.splash-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.splash-content h1 {
+    font-size: 42px;
+    letter-spacing: 10px;
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #00d9ff,
+        #7b2cff,
+        #c43cff
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes splashAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 700px) {
@@ -734,5 +805,110 @@ textarea {
 
     .goal-header {
         flex-direction: column;
+    }
+}
+
+#splash-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #050510;
+
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.splash-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.splash-content h1 {
+    font-size: 42px;
+    letter-spacing: 10px;
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #00d9ff,
+        #7b2cff,
+        #c43cff
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =========================
+   MENÚ DE HAMBURGUESA
+   ========================= */
+
+.hamburger-button {
+    display: none;
+}
+
+/* En celular */
+@media (max-width: 700px) {
+
+    .dashboard {
+        position: relative;
+    }
+
+    .hamburger-button {
+        display: flex;
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 1000;
+
+        width: 45px;
+        height: 45px;
+
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid rgba(123, 44, 255, 0.4);
+        border-radius: 12px;
+
+        background: rgba(10, 10, 25, 0.95);
+        color: white;
+
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px;
+
+        width: 230px;
+        height: 100vh;
+
+        z-index: 999;
+
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.menu-open {
+        left: 0;
+    }
+
+    .main-content {
+        width: 100%;
+        padding-top: 80px;
     }
 }
