@@ -1,0 +1,859 @@
+/* ================================
+   TEXIS — DISEÑO PRINCIPAL
+   ================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #03030a;
+    color: white;
+    overflow: hidden;
+}
+
+
+/* ================================
+   PANTALLA DE BIENVENIDA
+   ================================ */
+
+#splash-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(circle at 50% 60%,
+            rgba(40, 80, 180, 0.22),
+            transparent 30%),
+        radial-gradient(circle at 65% 65%,
+            rgba(130, 40, 200, 0.18),
+            transparent 28%),
+        #020207;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
+
+#splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+/* Logo de bienvenida */
+
+.splash-logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: 2px;
+
+    margin-bottom: 70px;
+
+    background: linear-gradient(
+        90deg,
+        #19d9ff,
+        #7b6cff,
+        #d45cff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+
+/* Icono */
+
+.texis-icon {
+    width: 72px;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 42px;
+    font-weight: bold;
+
+    color: white;
+
+    border: 3px solid #5bdcff;
+
+    box-shadow:
+        0 0 15px rgba(40, 210, 255, 0.8),
+        0 0 35px rgba(120, 70, 255, 0.4);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(40, 210, 255, 0.15),
+            rgba(120, 50, 220, 0.1)
+        );
+}
+
+
+/* Frase */
+
+.splash-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.splash-content h1 {
+    font-size: clamp(38px, 6vw, 76px);
+    line-height: 1.1;
+
+    background: linear-gradient(
+        90deg,
+        #6ffaff,
+        #82aaff,
+        #d477ff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    text-shadow:
+        0 0 25px rgba(70, 180, 255, 0.25);
+
+    animation: aparecer 1s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ================================
+   APLICACIÓN
+   ================================ */
+
+#app {
+    display: flex;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+#app.show {
+    opacity: 1;
+}
+
+
+/* ================================
+   BARRA LATERAL
+   ================================ */
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #09091a,
+            #05050e
+        );
+
+    border-right: 1px solid rgba(110, 70, 255, 0.25);
+
+    padding: 28px 18px;
+
+    position: relative;
+    z-index: 20;
+}
+
+
+/* Logo */
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 4px;
+
+    margin: 5px 10px 45px;
+
+    background: linear-gradient(
+        90deg,
+        #17d9ff,
+        #7c6cff,
+        #d65cff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.texis-icon-small {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #54dfff;
+    border-radius: 50%;
+
+    font-size: 21px;
+    color: white;
+
+    box-shadow:
+        0 0 12px rgba(50, 210, 255, 0.5);
+}
+
+
+/* Navegación */
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar nav button {
+    border: none;
+    background: transparent;
+
+    color: #b9b9c9;
+
+    padding: 14px 16px;
+
+    text-align: left;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.sidebar nav button:hover {
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(30, 150, 255, 0.14),
+            rgba(130, 60, 255, 0.14)
+        );
+
+    transform: translateX(3px);
+}
+
+.sidebar nav button:first-child {
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(30, 160, 255, 0.18),
+            rgba(130, 60, 255, 0.18)
+        );
+}
+
+
+/* ================================
+   CONTENIDO PRINCIPAL
+   ================================ */
+
+.main-content {
+    flex: 1;
+    height: 100vh;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 50% 55%,
+            rgba(35, 70, 160, 0.12),
+            transparent 35%
+        ),
+        #03030a;
+}
+
+
+/* ================================
+   BARRA SUPERIOR
+   ================================ */
+
+.top-bar {
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 28px;
+}
+
+#menu-button {
+    display: none;
+
+    border: none;
+    background: rgba(255,255,255,0.07);
+
+    color: white;
+
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+
+    font-size: 23px;
+
+    cursor: pointer;
+}
+
+.top-logo {
+    display: none;
+}
+
+
+/* ================================
+   PANTALLA PRINCIPAL DEL CHAT
+   ================================ */
+
+.chat-home {
+    height: calc(100vh - 80px);
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+
+/* Texto */
+
+.welcome-area {
+    text-align: center;
+
+    margin-bottom: 55px;
+
+    max-width: 750px;
+}
+
+.welcome-area h1 {
+    font-size: clamp(38px, 5vw, 62px);
+
+    margin-bottom: 18px;
+
+    background: linear-gradient(
+        90deg,
+        #62eaff,
+        #8495ff,
+        #d978ff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.welcome-area p {
+    color: #858596;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* ================================
+   BARRA DE MENSAJE
+   ================================ */
+
+.chat-input {
+    width: min(750px, 90%);
+
+    display: flex;
+    align-items: center;
+
+    padding: 6px 7px 6px 20px;
+
+    border-radius: 30px;
+
+    background: rgba(18, 18, 30, 0.9);
+
+    border: 1px solid rgba(100, 110, 255, 0.5);
+
+    box-shadow:
+        0 0 20px rgba(50, 100, 255, 0.08),
+        inset 0 0 20px rgba(80, 60, 180, 0.05);
+}
+
+.chat-input input {
+    flex: 1;
+
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 17px;
+}
+
+.chat-input input::placeholder {
+    color: #77788c;
+}
+
+.chat-input button {
+    width: 48px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1aaeff,
+            #704cff,
+            #c24dff
+        );
+
+    box-shadow:
+        0 0 15px rgba(80, 100, 255, 0.35);
+
+    transition: 0.2s ease;
+}
+
+.chat-input button:hover {
+    transform: scale(1.08);
+}
+
+
+/* ================================
+   CIRCUITOS DECORATIVOS
+   ================================ */
+
+.main-content::before,
+.main-content::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    opacity: 0.12;
+
+    pointer-events: none;
+}
+
+.main-content::before {
+    left: -80px;
+    bottom: -80px;
+
+    border-left: 2px solid #16d9ff;
+    border-top: 2px solid #16d9ff;
+
+    transform: rotate(45deg);
+}
+
+.main-content::after {
+    right: -80px;
+    top: 100px;
+
+    border-right: 2px solid #b04cff;
+    border-bottom: 2px solid #b04cff;
+
+    transform: rotate(45deg);
+}
+
+
+/* ================================
+   TEXIS — DISEÑO PARA CELULAR
+   ================================ */
+
+@media (max-width: 700px) {
+
+    body {
+        overflow: hidden;
+    }
+
+
+    /* ================================
+       MENÚ LATERAL
+       ================================ */
+
+    .sidebar {
+        position: fixed;
+
+        top: 0;
+        left: -290px;
+
+        width: 280px;
+        height: 100vh;
+
+        padding: 30px 20px;
+
+        transition: left 0.3s ease;
+
+        z-index: 100;
+
+        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .sidebar-logo {
+        font-size: 28px;
+        margin-bottom: 45px;
+    }
+
+    .sidebar nav {
+        gap: 10px;
+    }
+
+    .sidebar nav button {
+        font-size: 19px;
+        padding: 17px 18px;
+    }
+
+
+    /* ================================
+       BARRA SUPERIOR
+       ================================ */
+
+    .top-bar {
+        height: 82px;
+
+        padding: 0 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #menu-button {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 56px;
+        height: 56px;
+
+        border: 1px solid rgba(120, 100, 255, 0.3);
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        color: white;
+
+        font-size: 28px;
+
+        cursor: pointer;
+    }
+
+    #menu-button:active {
+        transform: scale(0.92);
+    }
+
+
+    /* ================================
+       LOGO SUPERIOR
+       ================================ */
+
+    .top-logo {
+        display: flex;
+
+        align-items: center;
+        gap: 10px;
+
+        font-size: 24px;
+
+        font-weight: bold;
+
+        letter-spacing: 2px;
+
+        background: linear-gradient(
+            90deg,
+            #22dfff,
+            #8a68ff,
+            #d55cff
+        );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+    }
+
+    .top-logo .texis-icon-small {
+        width: 42px;
+        height: 42px;
+
+        font-size: 21px;
+    }
+
+
+    /* ================================
+       CONTENIDO PRINCIPAL
+       ================================ */
+
+    .main-content {
+        width: 100%;
+        height: 100vh;
+    }
+
+
+    /* ================================
+       PANTALLA DEL CHAT
+       ================================ */
+
+    .chat-home {
+        height: calc(100vh - 82px);
+
+        padding: 20px 18px 40px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+    }
+
+
+    /* ================================
+       BIENVENIDA
+       ================================ */
+
+    .welcome-area {
+        width: 100%;
+        max-width: 100%;
+
+        text-align: center;
+
+        margin-bottom: 40px;
+    }
+
+    .welcome-area h1 {
+        font-size: 39px;
+
+        line-height: 1.15;
+
+        margin-bottom: 22px;
+
+        white-space: nowrap;
+
+        background: linear-gradient(
+            90deg,
+            #62eaff,
+            #8495ff,
+            #d978ff
+        );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+    }
+
+    .welcome-area p {
+        width: 100%;
+
+        max-width: 100%;
+
+        padding: 0 10px;
+
+        margin: 0 auto;
+
+        color: #9191a3;
+
+        font-size: 17px;
+
+        line-height: 1.6;
+    }
+
+
+    /* ================================
+       BARRA PARA ESCRIBIR
+       ================================ */
+
+    .chat-input {
+        width: 100%;
+
+        max-width: 100%;
+
+        min-height: 72px;
+
+        padding: 8px 9px 8px 22px;
+
+        border-radius: 38px;
+
+        background: rgba(18, 18, 30, 0.94);
+
+        border: 1px solid rgba(100, 110, 255, 0.55);
+
+        box-shadow:
+            0 0 25px rgba(50, 100, 255, 0.10),
+            inset 0 0 20px rgba(80, 60, 180, 0.06);
+    }
+
+    .chat-input input {
+        flex: 1;
+
+        min-width: 0;
+
+        border: none;
+
+        outline: none;
+
+        background: transparent;
+
+        color: white;
+
+        font-size: 17px;
+    }
+
+    .chat-input input::placeholder {
+        color: #77788c;
+    }
+
+    .chat-input button {
+        flex-shrink: 0;
+
+        width: 58px;
+        height: 58px;
+
+        border: none;
+
+        border-radius: 50%;
+
+        color: white;
+
+        font-size: 25px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1aaeff,
+                #704cff,
+                #c24dff
+            );
+
+        box-shadow:
+            0 0 18px rgba(80, 100, 255, 0.4);
+
+        cursor: pointer;
+
+        transition: 0.2s ease;
+    }
+
+    .chat-input button:active {
+        transform: scale(0.92);
+    }
+
+
+    /* ================================
+       CIRCUITOS DE FONDO
+       ================================ */
+
+    .main-content::before {
+        width: 480px;
+        height: 480px;
+
+        left: -200px;
+        bottom: -130px;
+
+        opacity: 0.15;
+    }
+
+    .main-content::after {
+        width: 480px;
+        height: 480px;
+
+        right: -200px;
+        top: 160px;
+
+        opacity: 0.15;
+    }
+
+
+    /* ================================
+       PANTALLA DE APERTURA
+       ================================ */
+
+    .splash-logo {
+        font-size: 40px;
+
+        gap: 15px;
+
+        margin-bottom: 65px;
+    }
+
+    .texis-icon {
+        width: 70px;
+        height: 70px;
+
+        font-size: 40px;
+    }
+
+    .splash-content {
+        width: 100%;
+
+        padding: 20px;
+    }
+
+    .splash-content h1 {
+        font-size: 50px;
+
+        line-height: 1.1;
+
+        max-width: 92vw;
+    }
+}
