@@ -11,34 +11,158 @@
 
 <body>
 
-<!-- SPLASH SCREEN -->
-<div id="splash-screen">
-    <div class="splash-content">
-        <img src="logo.png?v=2" alt="Texis" class="splash-logo">
-        <h1>TEXIS</h1>
-    </div>
-</div>
+    <!-- PANTALLA DE BIENVENIDA -->
+    <div id="splash-screen">
 
-    <!-- APLICACIÓN -->
-    <div id="texis-app">
+        <div class="splash-logo">
+            <div class="texis-icon">T</div>
+            <span>Texis</span>
+        </div>
 
-        <div class="container">
-
-            <h1 class="logo">TEXIS</h1>
-
-            <p class="subtitle">
-                Tu IA personal para organizarte, aprender y avanzar.
-            </p>
-
-            <button class="start-button" onclick="comenzar()">
-                Comenzar
-            </button>
-
+        <div class="splash-content">
+            <h1 id="splash-message">
+                Hagamos tus ideas realidad
+            </h1>
         </div>
 
     </div>
 
-    <script src="script.js"></script>
+
+    <!-- APLICACIÓN PRINCIPAL -->
+    <div id="app">
+
+        <!-- MENÚ LATERAL -->
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <span class="texis-icon-small">T</span>
+                <span>TEXIS</span>
+            </div>
+
+            <nav>
+                <button>🏠 Inicio</button>
+                <button>💬 Chats</button>
+                <button>📚 Tareas</button>
+                <button>🎯 Metas</button>
+                <button>📅 Horario</button>
+                <button>💙 Bienestar</button>
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTENIDO -->
+        <main class="main-content">
+
+            <header class="top-bar">
+
+                <button id="menu-button">☰</button>
+
+                <div class="top-logo">
+                    <span class="texis-icon-small">T</span>
+                    TEXIS
+                </div>
+
+            </header>
+
+
+            <section class="chat-home">
+
+                <div class="welcome-area">
+
+                    <h1 id="welcome-message">
+                        ¿En qué te ayudo hoy?
+                    </h1>
+
+                    <p>
+                        Estoy aquí para ayudarte a aprender,
+                        organizarte y convertir tus ideas en acciones.
+                    </p>
+
+                </div>
+
+
+                <div class="chat-input">
+
+                    <input
+                        type="text"
+                        placeholder="Escribe un mensaje o idea..."
+                        id="message-input"
+                    >
+
+                    <button id="send-button">
+                        ➤
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        /* FRASES DE TEXIS */
+
+        const frases = [
+            "Hagamos tus ideas realidad",
+            "Tu imaginación, mi herramienta",
+            "Cada idea merece ser construida",
+            "De la idea a la acción",
+            "Donde las ideas cobran vida",
+            "Aprende sin límites",
+            "Tu curiosidad, mi combustible",
+            "Pregunta todo, descubre más",
+            "El conocimiento a tu alcance",
+            "Organiza. Crea. Avanza.",
+            "Tu día, más inteligente",
+            "Menos caos, más claridad",
+            "Simplifica tu vida",
+            "El futuro se escribe aquí",
+            "Tu mente, amplificada",
+            "Piensa en grande, yo te acompaño",
+            "No hay pregunta demasiado grande",
+            "¿Qué tenemos en mente hoy?",
+            "Listo cuando tú lo estés",
+            "¿Por dónde empezamos?",
+            "Aquí, ahora, contigo"
+        ];
+
+
+        /* ELEGIR UNA FRASE ALEATORIA */
+
+        const fraseAleatoria =
+            frases[Math.floor(Math.random() * frases.length)];
+
+        document.getElementById("splash-message").textContent =
+            fraseAleatoria;
+
+
+        /* MOSTRAR LA APLICACIÓN DESPUÉS DE LA BIENVENIDA */
+
+        setTimeout(() => {
+
+            document.getElementById("splash-screen").classList.add("hidden");
+
+            document.getElementById("app").classList.add("show");
+
+        }, 2500);
+
+
+        /* MENÚ DEL CELULAR */
+
+        const menuButton = document.getElementById("menu-button");
+
+        menuButton.addEventListener("click", () => {
+
+            document.querySelector(".sidebar").classList.toggle("open");
+
+        });
+
+    </script>
 
 </body>
 </html>

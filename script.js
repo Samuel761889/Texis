@@ -190,52 +190,61 @@ function contenidoInicio() {
     const metas = obtenerMetas();
     const actividades = obtenerHorario();
 
-    const pendientes = tareas.filter(t => !t.completada).length;
-    const completadas = tareas.filter(t => t.completada).length;
+    const pendientes =
+        tareas.filter(t => !t.completada).length;
 
     return `
 
         <section class="welcome-card">
 
             <h1>
-                ¿En qué te ayudo hoy?
+                Hola 👋
             </h1>
 
             <p>
-                Organiza tu día, aprende algo nuevo,
-                trabaja en tus metas o simplemente habla conmigo.
+                Esto es lo que tienes para hoy.
+                Organiza tus tareas, revisa tu horario,
+                avanza en tus metas o habla con Texis.
             </p>
-
-            <div class="chat-preview">
-
-                <input
-                    type="text"
-                    placeholder="Pregúntale algo a Texis..."
-                >
-
-                <button onclick="mostrarSeccion('chat')">
-                    Enviar
-                </button>
-
-            </div>
 
         </section>
 
         <section class="dashboard-cards">
 
             <div class="info-card">
-                <span class="card-number">${pendientes}</span>
-                <span class="card-title">Tareas pendientes</span>
+
+                <span class="card-number">
+                    ${pendientes}
+                </span>
+
+                <span class="card-title">
+                    Tareas pendientes
+                </span>
+
             </div>
 
             <div class="info-card">
-                <span class="card-number">${actividades.length}</span>
-                <span class="card-title">Actividades en horario</span>
+
+                <span class="card-number">
+                    ${actividades.length}
+                </span>
+
+                <span class="card-title">
+                    Actividades en horario
+                </span>
+
             </div>
 
             <div class="info-card">
-                <span class="card-number">${metas.length}</span>
-                <span class="card-title">Metas activas</span>
+
+                <span class="card-number">
+                    ${metas.length}
+                </span>
+
+                <span class="card-title">
+                    Metas activas
+                </span>
+
             </div>
 
         </section>
@@ -245,42 +254,61 @@ function contenidoInicio() {
 
 
 /* =========================
-   CHAT
-   ========================= */
-
-/* =========================
    CHAT DE TEXIS
    ========================= */
 
 function contenidoChat() {
 
     return `
-        <h1 class="section-title">
-            Habla con Texis
-        </h1>
 
-        <p class="section-description">
-            Habla conmigo y recibe respuestas directamente desde Texis.
-        </p>
+        <div class="chat-header">
 
-        <section class="welcome-card">
+            <div>
 
-            <h1>
-                Hola, soy Texis. 👋
-            </h1>
+                <h1 class="section-title">
+                    Habla con Texis
+                </h1>
+
+                <p class="section-description">
+                    Habla conmigo y recibe respuestas directamente desde Texis.
+                </p>
+
+            </div>
+
+            <button
+                class="new-chat-button"
+                onclick="nuevoChat()"
+            >
+                + Nuevo chat
+            </button>
+
+        </div>
+
+
+        <div class="texis-chat">
 
             <div
                 id="chat-messages"
                 class="chat-messages"
             >
 
-                <div class="chat-message texis-message">
-                    Hola 👋 Soy Texis. ¿En qué puedo ayudarte?
+                <div class="chat-empty">
+
+                    <h2>
+                        ¿Qué quieres hacer hoy?
+                    </h2>
+
+                    <p>
+                        Puedo ayudarte a estudiar, organizarte,
+                        resolver dudas o trabajar en tus metas.
+                    </p>
+
                 </div>
 
             </div>
 
-            <div class="chat-preview">
+
+            <div class="chat-input-container">
 
                 <input
                     id="texis-chat-input"
@@ -297,12 +325,13 @@ function contenidoChat() {
                     id="texis-send-button"
                     onclick="enviarMensajeTexis()"
                 >
-                    Enviar
+                    ➤
                 </button>
 
             </div>
 
-        </section>
+        </div>
+
     `;
 }
 
@@ -425,18 +454,16 @@ async function enviarMensajeTexis() {
         const loading =
             document.getElementById("texis-loading");
 
-
         if (loading) {
             loading.remove();
         }
 
-
         mensajes.innerHTML += `
             <div class="chat-message texis-message">
-                ❌ No pude conectarme con Texis.
+                ❌ Error de Texis:<br>
+                ${escaparHTML(error.message)}
             </div>
         `;
-
 
         console.error(
             "Error de Texis:",
@@ -1915,12 +1942,30 @@ function escaparHTML(texto) {
 function alternarMenu() {
 
     const sidebar = document.querySelector(".sidebar");
+    const boton = document.querySelector(".hamburger-button");
 
-    if (!sidebar) {
+    if (!sidebar || !boton) {
         return;
     }
 
-    sidebar.classList.toggle("menu-open");
+    const esCelular = window.innerWidth <= 700;
+
+    if (esCelular) {
+
+        const abierto =
+            sidebar.classList.toggle("menu-open");
+
+        boton.textContent =
+            abierto ? "✕" : "☰";
+
+    } else {
+
+        const contraido =
+            sidebar.classList.toggle("menu-collapsed");
+
+        boton.textContent =
+            contraido ? "☰" : "✕";
+    }
 }
 
 /* =========================
@@ -1969,5 +2014,100 @@ window.addEventListener("load", function () {
         }, 600);
 
     }, 1500);
+
+});
+
+/* ==================================================
+   NUEVO CHAT
+   ================================================== */
+
+function nuevoChat() {
+
+    const mensajes =
+        document.getElementById("chat-messages");
+
+    const input =
+        document.getElementById("texis-chat-input");
+
+    if (!mensajes) {
+        return;
+    }
+
+    mensajes.innerHTML = `
+
+        <div class="chat-empty">
+
+            <h2>
+                ¿Qué quieres hacer hoy?
+            </h2>
+
+            <p>
+                Puedo ayudarte a estudiar, organizarte,
+                resolver dudas o trabajar en tus metas.
+            </p>
+
+        </div>
+
+    `;
+
+    if (input) {
+        input.value = "";
+        input.focus();
+    }
+}
+
+/* =========================================
+   MENÚ MÓVIL DE TEXIS
+   ========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const menuButton = document.getElementById("menu-button");
+    const sidebar = document.querySelector(".sidebar");
+
+    if (!menuButton || !sidebar) {
+        return;
+    }
+
+    // Abrir y cerrar el menú
+    menuButton.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+    });
+
+
+    // Cerrar el menú al seleccionar una opción
+    const menuOptions = sidebar.querySelectorAll("button");
+
+    menuOptions.forEach((option) => {
+
+        option.addEventListener("click", () => {
+
+            if (window.innerWidth <= 700) {
+                sidebar.classList.remove("open");
+            }
+
+        });
+
+    });
+
+
+    // Cerrar el menú al tocar fuera de él
+    document.addEventListener("click", (event) => {
+
+        if (window.innerWidth > 700) {
+            return;
+        }
+
+        const clickedInsideMenu =
+            sidebar.contains(event.target);
+
+        const clickedMenuButton =
+            menuButton.contains(event.target);
+
+        if (!clickedInsideMenu && !clickedMenuButton) {
+            sidebar.classList.remove("open");
+        }
+
+    });
 
 });
