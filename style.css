@@ -510,7 +510,7 @@ body {
 
 
 /* ================================
-   TEXIS — CELULAR
+   TEXIS — DISEÑO PARA CELULAR
    ================================ */
 
 @media (max-width: 700px) {
@@ -519,10 +519,14 @@ body {
         overflow: hidden;
     }
 
-    /* MENÚ */
+
+    /* ================================
+       MENÚ LATERAL
+       ================================ */
 
     .sidebar {
         position: fixed;
+
         top: 0;
         left: -290px;
 
@@ -557,10 +561,13 @@ body {
     }
 
 
-    /* BARRA SUPERIOR */
+    /* ================================
+       BARRA SUPERIOR
+       ================================ */
 
     .top-bar {
         height: 82px;
+
         padding: 0 20px;
 
         display: flex;
@@ -578,13 +585,26 @@ body {
         height: 56px;
 
         border: 1px solid rgba(120, 100, 255, 0.3);
+
         border-radius: 50%;
 
         background: rgba(255, 255, 255, 0.08);
 
         color: white;
+
         font-size: 28px;
+
+        cursor: pointer;
     }
+
+    #menu-button:active {
+        transform: scale(0.92);
+    }
+
+
+    /* ================================
+       LOGO SUPERIOR
+       ================================ */
 
     .top-logo {
         display: flex;
@@ -593,7 +613,9 @@ body {
         gap: 10px;
 
         font-size: 24px;
+
         font-weight: bold;
+
         letter-spacing: 2px;
 
         background: linear-gradient(
@@ -617,12 +639,19 @@ body {
     }
 
 
-    /* CONTENIDO */
+    /* ================================
+       CONTENIDO PRINCIPAL
+       ================================ */
 
     .main-content {
         width: 100%;
         height: 100vh;
     }
+
+
+    /* ================================
+       PANTALLA DEL CHAT
+       ================================ */
 
     .chat-home {
         height: calc(100vh - 82px);
@@ -630,71 +659,149 @@ body {
         padding: 20px 18px 40px;
 
         display: flex;
+
         flex-direction: column;
 
         justify-content: center;
+
         align-items: center;
     }
 
 
-    /* BIENVENIDA */
+    /* ================================
+       BIENVENIDA
+       ================================ */
 
     .welcome-area {
         width: 100%;
-        max-width: 600px;
+        max-width: 100%;
 
         text-align: center;
 
-        margin-bottom: 48px;
+        margin-bottom: 40px;
     }
 
     .welcome-area h1 {
-        font-size: 45px;
+        font-size: 39px;
 
-        line-height: 1.12;
+        line-height: 1.15;
 
         margin-bottom: 22px;
+
+        white-space: nowrap;
+
+        background: linear-gradient(
+            90deg,
+            #62eaff,
+            #8495ff,
+            #d978ff
+        );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
     }
 
     .welcome-area p {
-        max-width: 500px;
+        width: 100%;
+
+        max-width: 100%;
+
+        padding: 0 10px;
 
         margin: 0 auto;
 
-        font-size: 18px;
+        color: #9191a3;
+
+        font-size: 17px;
 
         line-height: 1.6;
-
-        color: #9191a3;
     }
 
 
-    /* BARRA DE CHAT */
+    /* ================================
+       BARRA PARA ESCRIBIR
+       ================================ */
 
     .chat-input {
         width: 100%;
-        max-width: 650px;
+
+        max-width: 100%;
 
         min-height: 72px;
 
         padding: 8px 9px 8px 22px;
 
         border-radius: 38px;
+
+        background: rgba(18, 18, 30, 0.94);
+
+        border: 1px solid rgba(100, 110, 255, 0.55);
+
+        box-shadow:
+            0 0 25px rgba(50, 100, 255, 0.10),
+            inset 0 0 20px rgba(80, 60, 180, 0.06);
     }
 
     .chat-input input {
-        font-size: 18px;
+        flex: 1;
+
+        min-width: 0;
+
+        border: none;
+
+        outline: none;
+
+        background: transparent;
+
+        color: white;
+
+        font-size: 17px;
+    }
+
+    .chat-input input::placeholder {
+        color: #77788c;
     }
 
     .chat-input button {
+        flex-shrink: 0;
+
         width: 58px;
         height: 58px;
 
+        border: none;
+
+        border-radius: 50%;
+
+        color: white;
+
         font-size: 25px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1aaeff,
+                #704cff,
+                #c24dff
+            );
+
+        box-shadow:
+            0 0 18px rgba(80, 100, 255, 0.4);
+
+        cursor: pointer;
+
+        transition: 0.2s ease;
+    }
+
+    .chat-input button:active {
+        transform: scale(0.92);
     }
 
 
-    /* CIRCUITOS */
+    /* ================================
+       CIRCUITOS DE FONDO
+       ================================ */
 
     .main-content::before {
         width: 480px;
@@ -717,7 +824,9 @@ body {
     }
 
 
-    /* PANTALLA DE APERTURA */
+    /* ================================
+       PANTALLA DE APERTURA
+       ================================ */
 
     .splash-logo {
         font-size: 40px;
@@ -732,6 +841,12 @@ body {
         height: 70px;
 
         font-size: 40px;
+    }
+
+    .splash-content {
+        width: 100%;
+
+        padding: 20px;
     }
 
     .splash-content h1 {
